@@ -61,8 +61,8 @@ tmp<-ndata%>%group_by(interval,period)%>%summarise(
   ,total_percentage= hit/attempt
 )%>%filter(period<5)%>%arrange(interval)
  
-tmp<-na.omit(tmp) 
-p<-ggplot(data = tmp, aes(x =interval, y = total_percentage,group=1))+
+### Draw the free throw percentage acoording to quarter and  rest time
+p<-ggplot(data = na.omit(tmp), aes(x =interval, y = total_percentage,group=1))+
   geom_line(aes(color = as.factor(period)), size = 1) +
   facet_wrap( ~ period)
 p+scale_x_continuous(breaks=seq(0, 12, 1))
